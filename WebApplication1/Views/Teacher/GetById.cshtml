@@ -1,0 +1,13 @@
+﻿@model WebApplication1.Models.TeacherTable.Teacher
+
+@{
+    string controllerName = "Teacher";
+}
+<div>
+    <h1>Куратор : @Model.Name</h1>
+    <div>Специальность : @Model.Speciality</div>
+
+    <div class="createTeacher" style="position:relative; left:50%;">
+        @Html.ActionLink("На главную", "Index", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

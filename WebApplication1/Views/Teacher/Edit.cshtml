@@ -1,0 +1,26 @@
+﻿@model WebApplication1.Models.TeacherTable.Teacher
+
+@{
+    string controllerName = "Teacher";
+}
+<style>
+    input {
+        position: relative
+    }
+</style>
+<div>
+    @using (Html.BeginForm("Edit", controllerName, FormMethod.Post, new { @class = "form-vertical form-bordered form-striped form-validate" }))
+    {
+        <h1>Добавить куратора</h1>
+        <label>Введите ФИО :</label>
+        <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
+        <label>Введите специальность :</label>
+        <div>@Html.TextBoxFor(x => x.Speciality, new { @class = "form-control" })</div>
+
+        <input type="submit" value="Добавить в список кураторов" />
+    }
+
+    <div>
+        @Html.ActionLink("К списку кураторов", "Index")
+    </div>
+</div>

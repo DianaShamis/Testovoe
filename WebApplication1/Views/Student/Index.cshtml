@@ -1,0 +1,24 @@
+﻿@model WebApplication1.Models.StudentTable.StudentListViewModel
+
+@{
+    string controllerName = "Student";
+}
+<div>
+    <h1>Список студентов</h1>
+    @foreach (var studentName in Model.StudentList)
+    {
+        <div class="studentList">
+            @*studentName.Name*@
+            @Html.ActionLink(studentName.Name, "Details", "Student", new { id = studentName.Id }, new { @class = "navbar-brend" })
+            <div class="editStudent" style="float: right;">
+                @Html.ActionLink("Редактировать", "Edit", "Student", new { id = studentName.Id }, new { @class = "navbar-brend" })
+            </div>
+            <div class="deleteStudent" style="float: right;">
+                @Html.ActionLink("Удалить", "Delete", "Student", new { id = studentName.Id }, new { @class = "navbar-brend" })
+            </div>
+        </div>
+    }
+    <div class="createStudent" style="position:relative; left:50%;">
+        @Html.ActionLink("Создать", "Create", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

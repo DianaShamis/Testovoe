@@ -1,0 +1,25 @@
+﻿@model WebApplication1.Models.GroupTable.Group
+@{
+    string controllerName = "Group";
+}
+
+<div>
+    @using (Html.BeginForm("Create", controllerName, FormMethod.Post, new { @class = "form-vertical form-bordered form-striped form-validate" }))
+    {
+        <h1>Создание группы</h1>
+        <label>Введите название группы :</label>
+        <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
+
+        <label>Введите год :</label>
+        <div>@Html.TextBoxFor(x => x.Year, new { @type = "date" })</div>
+        
+        <label>Введите специальность :</label>
+        <div>@Html.TextBoxFor(x => x.Speciality, new { @class = "form-control" })</div>
+
+        <input type="submit" value="Добавить в группу" />
+    }
+
+    <div>
+        @Html.ActionLink("К списку групп", "Index")
+    </div>
+</div>

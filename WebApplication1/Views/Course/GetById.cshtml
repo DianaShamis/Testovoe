@@ -1,0 +1,12 @@
+﻿@model WebApplication1.Models.CourseTable.Course
+
+@{
+    string controllerName = "Course";
+}
+<div>
+    <h1>Курс : @Model.Name</h1>
+
+    <div class="createCourse" style="position:relative; left:50%;">
+        @Html.ActionLink("На главную", "Index", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

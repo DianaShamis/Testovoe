@@ -1,0 +1,14 @@
+﻿@model WebApplication1.Models.GroupTable.Group
+
+@{
+    string controllerName = "Group";
+}
+<div>
+    <h1>Группа : @Model.Name</h1>
+    <div>Год : @Model.Year</div>
+    <div>Специальность : @Model.Speciality</div>
+
+    <div class="createGroup" style="position:relative; left:50%;">
+        @Html.ActionLink("На главную", "Index", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

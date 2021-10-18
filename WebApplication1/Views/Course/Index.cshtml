@@ -1,0 +1,25 @@
+﻿@model WebApplication1.Models.CourseTable.CourseListViewModel
+
+@{
+    string controllerName = "Course";
+}
+<div>
+    <h1>Список курсов</h1>
+    @foreach (var courseName in Model.CourseList)
+    {
+<div class="courseList">
+    @*courseName.Name*@
+                        @Html.ActionLink(courseName.Name, "Details", "Course", new { id = courseName.Id }, new { @class = "navbar-brend" })
+                    <div class="editCourse" style="float: right;">
+                        @Html.ActionLink("Редактировать", "Edit", "Course", new { id = courseName.Id }, new { @class = "navbar-brend" })
+                    </div>
+                    <div class="deleteGroup" style="float: right;">
+                        @Html.ActionLink("Удалить", "Delete", "Course", new { id = courseName.Id }, new { @class = "navbar-brend" })
+
+                    </div>
+                </div>
+            }
+            <div class="createCourse" style="position:relative; left:50%;">
+                @Html.ActionLink("Создать", "Create", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+            </div>
+        </div>

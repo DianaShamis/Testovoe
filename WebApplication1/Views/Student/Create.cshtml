@@ -1,0 +1,42 @@
+﻿@model WebApplication1.Models.StudentTable.StudentViewModel
+@{
+    string controllerName = "Student";
+}
+<style>
+    input {
+        background-color: #4CAF50;
+        border: none;
+        color: white;
+        padding: 16px 32px;
+        position: relative;
+    }
+</style>
+<div>
+    @using (Html.BeginForm("Create", controllerName, FormMethod.Post, new { @class = "form-vertical form-bordered form-striped form-validate", enctype = "multipart/form-data" }))
+    {
+        <h1>Добавить студента</h1>
+        <label>Введите ФИО :</label>
+        <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
+
+        <label>Введите номер телефона :</label>
+        <div>
+            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
+           
+        </div>
+        <label>Добавьте фото :</label>
+        <div>
+            <p>
+                <input type="file" name="uploadedFile" >
+            </p>
+        </div>
+
+        <label>Выберете группу:</label>
+        <div>@Html.DropDownListFor(x => x.GroupId, Model.GroupList, new { @class = "form-control" })</div>
+
+        <input type="submit" value="Добавить в список студентов" />
+    }
+
+    <div>
+        @Html.ActionLink("К списку студентов", "Index")
+    </div>
+</div>
