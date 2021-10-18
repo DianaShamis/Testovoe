@@ -6,20 +6,26 @@
     input {
         position: relative
     }
+    div {
+        padding-bottom: 10px;
+    }
 </style>
 <div>
     @using (Html.BeginForm("Edit", controllerName, FormMethod.Post, new { @class = "form-vertical form-bordered form-striped form-validate", enctype = "multipart/form-data" }))
     {
         <h1>Редактировать студента</h1>
         <label>Введите ФИО :</label>
-        <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
+        <div>@Html.TextBoxFor(x => x.Student.Name, new { @class = "form-control" })</div>
 
         <label>Введите номер телефона :</label>
-        <div>
-            @Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })
-           
-        </div>
+        <div>@Html.TextBoxFor(x => x.Student.Phone, new { @class = "form-control" })</div>
 
+        @if (Model.Student.StudentPhoto != null)
+        {
+            <div>
+                <img style="width:200px; height:150px;" class="photo" src="@Url.Content(Model.Student.StudentPhoto.Path)">
+            </div>
+        }
         <label>Добавьте фото :</label>
         <div>
             <p>
@@ -34,6 +40,6 @@
     }
 
     <div>
-        @Html.ActionLink("К списку студентов", "Index")
+        @Html.ActionLink("Сохранить изменения", "Index")
     </div>
 </div>
