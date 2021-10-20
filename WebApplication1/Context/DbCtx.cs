@@ -3,6 +3,7 @@ using WebApplication1.Models.CourseTable;
 using WebApplication1.Models.GroupTable;
 using WebApplication1.Models.Photo;
 using WebApplication1.Models.StudentTable;
+using WebApplication1.Models.SubjectTable;
 using WebApplication1.Models.TeacherTable;
 
 namespace WebApplication1.Context
@@ -19,6 +20,7 @@ namespace WebApplication1.Context
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
         public DbSet<StudentPhoto> StudentPhotos { get; set; }
+        public DbSet<Subject> Subjects { get; set; }
 
         public DbCtx()
         {

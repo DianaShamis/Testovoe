@@ -8,6 +8,7 @@ using WebApplication1.Context;
 using WebApplication1.Service.Courses;
 using WebApplication1.Service.Groups;
 using WebApplication1.Service.Students;
+using WebApplication1.Service.Subjects;
 using WebApplication1.Service.Teachers;
 
 namespace WebApplication1
@@ -29,6 +30,7 @@ namespace WebApplication1
             services.AddTransient<ITeacherService, TeacherService>();
             services.AddTransient<IStudentService, StudentService>();
             services.AddTransient<ICourseService, CourseService>();
+            services.AddTransient<ISubjectService, SubjectService>();
             services.AddControllersWithViews();
         }
 

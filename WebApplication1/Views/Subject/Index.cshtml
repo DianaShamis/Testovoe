@@ -1,0 +1,46 @@
+﻿@model WebApplication1.Models.SubjectTable.SubjectListViewModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Список предметов</h1>
+
+<p>
+    <a asp-action="Create">Добавить предмет</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+         
+            <th>
+               Предмет
+            </th>
+            <th>
+                Преподователь
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.SubjectList)
+        {
+            <tr>
+                <td hidden="hidden">
+                    @Html.DisplayFor(modelItem => item.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Teacher.Name)
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Редактировать", new { id=item.Id  }) |
+
+                    @Html.ActionLink("Delete", "Удалить", new { id=item.Id })
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
