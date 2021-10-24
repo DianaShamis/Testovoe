@@ -17,8 +17,6 @@ namespace WebApplication1.Controllers
         private string _createTeacher = "~/Views/Teacher/Create.cshtml";
         private string _getById = "~/Views/Teacher/GetById.cshtml";
         private string _editTeacher = "~/Views/Teacher/Edit.cshtml";
-        
-
 
         public TeacherController(ITeacherService teacherService)
         {
@@ -56,7 +54,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _teacherService.Create(teacher);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _teacherService.Create(teacher);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -79,7 +80,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _teacherService.Update(id, teacher);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _teacherService.Update(id, teacher);
                 return RedirectToAction(nameof(Index));
             }
             catch

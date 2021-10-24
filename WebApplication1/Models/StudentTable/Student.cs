@@ -12,7 +12,6 @@ namespace WebApplication1.Models.StudentTable
         public long Phone { get; set; }
         public int GroupId { get; set; }
         public Group Group { get; set; }
-
         public StudentPhoto StudentPhoto { get; set; }
 
     }

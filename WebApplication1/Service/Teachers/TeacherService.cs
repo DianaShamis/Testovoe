@@ -69,7 +69,13 @@ namespace WebApplication1.Service.Teachers
             var teacher = new Models.TeacherTable.Teacher();
             if (id > 0)
             {
-               teacher = _context.Teachers.Where(_ => _.Id == id).FirstOrDefault();
+                teacher = _context.Teachers.Where(_ => _.Id == id).FirstOrDefault();
+                if(teacher != null)
+                {
+                    var subjectList = _context.Subjects.Where(_ => _.TeacherId == teacher.Id).ToList();
+                    teacher.Subject = subjectList;
+                }
+                
             }
             else
             {

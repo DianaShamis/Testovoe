@@ -10,10 +10,10 @@ namespace WebApplication1.Context
 {
     public class DbCtx : DbContext
     {
-        public DbCtx(DbContextOptions<DbCtx> options, ModelBuilder builder)
+        public DbCtx(DbContextOptions<DbCtx> options)
             : base(options)
         {
-            //builder.Entity<Student>().HasOne(s => s.StudentPhoto).WithOne(p => p.Student).HasForeignKey<StudentPhoto>(o => o.StudentId);
+
         }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -22,10 +22,7 @@ namespace WebApplication1.Context
         public DbSet<StudentPhoto> StudentPhotos { get; set; }
         public DbSet<Subject> Subjects { get; set; }
 
-        public DbCtx()
-        {
-            Database.EnsureCreated();
-        }
+
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

@@ -58,7 +58,6 @@ namespace WebApplication1.Controllers
             selectListItem.Insert(0, new SelectListItem { Text = "", Value = "" });
 
             var model = new StudentViewModel();
-
             model.GroupList = selectListItem;
 
             return View(_createStudent, model);
@@ -71,7 +70,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _studentService.Create(student, uploadedFile);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _studentService.Create(student, uploadedFile);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -93,13 +95,9 @@ namespace WebApplication1.Controllers
             selectListItem.Insert(0, new SelectListItem { Text = "", Value = "" });
 
             var student = _studentService.GetById(id);
-            var currentStudent = new StudentViewModel
-            {
-                Student = student,
-                GroupList = selectListItem
-            };
+            student.GroupList = selectListItem;
 
-            return View(_editStudent, currentStudent);
+            return View(_editStudent, student);
         }
 
         // POST: StudentController1/Edit/5
@@ -109,7 +107,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _studentService.Update(id, student, uploadedFile);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _studentService.Update(id, student, uploadedFile);
                 return RedirectToAction(nameof(Index));
             }
             catch

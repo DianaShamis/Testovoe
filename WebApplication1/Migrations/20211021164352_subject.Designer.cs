@@ -10,8 +10,8 @@ using WebApplication1.Context;
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DbCtx))]
-    [Migration("20211021105859_init")]
-    partial class init
+    [Migration("20211021164352_subject")]
+    partial class subject
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -167,7 +167,7 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.SubjectTable.Subject", b =>
                 {
                     b.HasOne("WebApplication1.Models.TeacherTable.Teacher", "Teacher")
-                        .WithMany("Subjects")
+                        .WithMany("Subject")
                         .HasForeignKey("TeacherId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -187,7 +187,7 @@ namespace WebApplication1.Migrations
 
             modelBuilder.Entity("WebApplication1.Models.TeacherTable.Teacher", b =>
                 {
-                    b.Navigation("Subjects");
+                    b.Navigation("Subject");
                 });
 #pragma warning restore 612, 618
         }

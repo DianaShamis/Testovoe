@@ -117,12 +117,16 @@ namespace WebApplication1.Service.Students
 
             }
         }
-        public Models.StudentTable.Student GetById(int id)
+        public StudentViewModel GetById(int id)
         {
-            var student = new Models.StudentTable.Student();
+            var student = new StudentViewModel();
             if (id > 0)
             {
-                student = _context.Students.Where(_ => _.Id == id).Include(p => p.StudentPhoto).FirstOrDefault();
+                var currentStudent = _context.Students.Where(_ => _.Id == id).Include(p => p.StudentPhoto).FirstOrDefault();
+                student.Name = currentStudent.Name;
+                student.Phone = currentStudent.Phone;
+                student.GroupId = currentStudent.GroupId;
+                student.StudentPhoto = currentStudent.StudentPhoto;
             }
             else
             {

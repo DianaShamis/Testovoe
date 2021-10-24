@@ -55,6 +55,9 @@ namespace WebApplication1.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
                 _groupService.Create(group);
                 return RedirectToAction(nameof(Index));
             }
@@ -78,7 +81,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _groupService.Update(id, group);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _groupService.Update(id, group);
                 return RedirectToAction(nameof(Index));
             }
             catch

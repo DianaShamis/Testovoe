@@ -11,7 +11,7 @@ namespace WebApplication1.Service.Students
     {
         List<Student> List();
         void Create(Student student, IFormFile uploadFile);
-        Student GetById(int id);
+        StudentViewModel GetById(int id);
         void Update(int id, Models.StudentTable.Student student, IFormFile uploadedFile);
         void Delete(int id);
     }

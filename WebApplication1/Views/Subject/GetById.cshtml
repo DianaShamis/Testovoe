@@ -1,0 +1,18 @@
+﻿@model WebApplication1.Models.SubjectTable.Subject
+
+@{
+    string controllerName = "Subject";
+}
+<div>
+    <h1>Предмет : @Model.Name</h1>
+    @if (Model.Teacher != null)
+    {
+        <div>Куратор : @Model.Teacher.Name</div>
+    }
+
+
+
+    <div class="createSubject" style="position:relative; left:50%;">
+        @Html.ActionLink("На главную", "Index", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

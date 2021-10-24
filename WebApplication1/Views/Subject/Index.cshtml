@@ -1,46 +1,24 @@
 ﻿@model WebApplication1.Models.SubjectTable.SubjectListViewModel
 
 @{
-    ViewData["Title"] = "Index";
+    string controllerName = "Subject";
 }
-
-<h1>Список предметов</h1>
-
-<p>
-    <a asp-action="Create">Добавить предмет</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-         
-            <th>
-               Предмет
-            </th>
-            <th>
-                Преподователь
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var item in Model.SubjectList)
-        {
-            <tr>
-                <td hidden="hidden">
-                    @Html.DisplayFor(modelItem => item.Id)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Name)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.Teacher.Name)
-                </td>
-                <td>
-                    @Html.ActionLink("Edit", "Редактировать", new { id=item.Id  }) |
-
-                    @Html.ActionLink("Delete", "Удалить", new { id=item.Id })
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+<div>
+    <h1>Список предметов</h1>
+    @foreach (var subjectName in Model.SubjectList)
+    {
+        <div class="teacherList">
+            @*teacherName.Name*@
+            @Html.ActionLink(subjectName.Name, "Details", "Subject", new { id = subjectName.Id }, new { @class = "navbar-brend" })
+            <div class="editSubject" style="float: right;">
+                @Html.ActionLink("Редактировать", "Edit", "Subject", new { id = subjectName.Id }, new { @class = "navbar-brend" })
+            </div>
+            <div class="deleteSubject" style="float: right;">
+                @Html.ActionLink("Удалить", "Delete", "Subject", new { id = subjectName.Id }, new { @class = "navbar-brend" })
+            </div>
+        </div>
+    }
+    <div class="createSubject" style="position:relative; left:50%;">
+        @Html.ActionLink("Создать", "Create", controllerName, new { area = "" }, new { @class = "navbar-brend" })
+    </div>
+</div>

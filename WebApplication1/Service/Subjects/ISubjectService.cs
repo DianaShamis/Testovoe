@@ -11,7 +11,7 @@ namespace WebApplication1.Service.Subjects
         List<Subject> List();
         void Create(Subject subject);
         Subject GetById(int id);
-        void Update(int id, Models.SubjectTable.Subject subject);
+        void Update(int id, Subject subject);
         void Delete(int id);
     }
 }

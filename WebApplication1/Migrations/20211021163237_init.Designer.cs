@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using WebApplication1.Context;
 
 namespace WebApplication1.Migrations
 {
     [DbContext(typeof(DbCtx))]
-    partial class DbCtxModelSnapshot : ModelSnapshot
+    [Migration("20211021163237_init")]
+    partial class init
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -102,26 +104,6 @@ namespace WebApplication1.Migrations
                     b.ToTable("Students");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.SubjectTable.Subject", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TeacherId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("TeacherId");
-
-                    b.ToTable("Subjects");
-                });
-
             modelBuilder.Entity("WebApplication1.Models.TeacherTable.Teacher", b =>
                 {
                     b.Property<int>("Id")
@@ -162,17 +144,6 @@ namespace WebApplication1.Migrations
                     b.Navigation("Group");
                 });
 
-            modelBuilder.Entity("WebApplication1.Models.SubjectTable.Subject", b =>
-                {
-                    b.HasOne("WebApplication1.Models.TeacherTable.Teacher", "Teacher")
-                        .WithMany("Subject")
-                        .HasForeignKey("TeacherId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Teacher");
-                });
-
             modelBuilder.Entity("WebApplication1.Models.GroupTable.Group", b =>
                 {
                     b.Navigation("Students");
@@ -181,11 +152,6 @@ namespace WebApplication1.Migrations
             modelBuilder.Entity("WebApplication1.Models.StudentTable.Student", b =>
                 {
                     b.Navigation("StudentPhoto");
-                });
-
-            modelBuilder.Entity("WebApplication1.Models.TeacherTable.Teacher", b =>
-                {
-                    b.Navigation("Subject");
                 });
 #pragma warning restore 612, 618
         }

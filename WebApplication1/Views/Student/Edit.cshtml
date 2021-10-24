@@ -15,15 +15,17 @@
     {
         <h1>Редактировать студента</h1>
         <label>Введите ФИО :</label>
-        <div>@Html.TextBoxFor(x => x.Student.Name, new { @class = "form-control" })</div>
+        <span asp-validation-for="Name" style="color:red;"></span>
+        <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
 
         <label>Введите номер телефона :</label>
-        <div>@Html.TextBoxFor(x => x.Student.Phone, new { @class = "form-control" })</div>
+        <span asp-validation-for="Phone" style="color:red;"></span>
+        <div>@Html.TextBoxFor(x => x.Phone, new { @class = "form-control" })</div>
 
-        @if (Model.Student.StudentPhoto != null)
+        @if (Model.StudentPhoto != null)
         {
             <div>
-                <img style="width:200px; height:150px;" class="photo" src="@Url.Content(Model.Student.StudentPhoto.Path)">
+                <img style="width:200px; height:150px;" class="photo" src="@Url.Content(Model.StudentPhoto.Path)">
             </div>
         }
         <label>Добавьте фото :</label>
@@ -34,6 +36,7 @@
         </div>
 
         <label>Выберете группу:</label>
+        <span asp-validation-for="GroupId" style="color:red;"></span>
         <div>@Html.DropDownListFor(x => x.GroupId, Model.GroupList, new { @class = "form-control" })</div>
 
         <input type="submit" value="Добавить в список студентов" />

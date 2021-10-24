@@ -13,31 +13,36 @@ namespace WebApplication1.Controllers
 {
     public class SubjectController : Controller
     {
+        private ISubjectService _subjectService;
         private ITeacherService _teacherService;
-        private  ISubjectService _subjectService;
+
+        private string _listSubject = "~/Views/Subject/Index.cshtml";
+        private string _createSubject = "~/Views/Subject/Create.cshtml";
+        private string _getById = "~/Views/Subject/GetById.cshtml";
+        private string _editSubject = "~/Views/Subject/Edit.cshtml";
 
         public SubjectController(ISubjectService subjectService, ITeacherService teacherService)
         {
-            _teacherService = teacherService;
             _subjectService = subjectService;
+            _teacherService = teacherService;
         }
         // GET: SubjectController
         public ActionResult Index()
         {
             var subjectList = _subjectService.List();
-           
 
             var model = new SubjectListViewModel
             {
                 SubjectList = subjectList
             };
-            return View(model);
+            return View(_listSubject, model);
         }
 
         // GET: SubjectController/Details/5
         public ActionResult Details(int id)
         {
-            return View();
+            var subject = _subjectService.GetById(id);
+            return View(_getById, subject);
         }
 
         // GET: SubjectController/Create
@@ -51,52 +56,66 @@ namespace WebApplication1.Controllers
             }).ToList();
 
             selectListItem.Insert(0, new SelectListItem { Text = "", Value = "" });
-            
-            var model = new SubjectViewModel();
-            model.TeacherList = selectListItem;
-            return View( model);
+
+            var subject = new SubjectViewModel();
+            subject.TeacherList = selectListItem;
+
+            return View(_createSubject, subject);
+
         }
 
         // POST: SubjectController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(SubjectViewModel model)
+        public ActionResult Create(Subject collection)
         {
-           
-          
-
-        
-            var subject = new Subject()
+            try
             {
-                Id = model.Id,
-                Name = model.Name,
-                TeacherId = model.TeacherId,
-                Teacher=model.Teacher
-
-            };
-           
-            _subjectService.Create(subject);
-            return View("Index");
-           
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _subjectService.Create(collection);
+                return RedirectToAction(nameof(Index));
+            }
+            catch
+            {
+                return View();
+            }
         }
 
         // GET: SubjectController/Edit/5
         public ActionResult Edit(int id)
         {
-            var currentSubject = _subjectService.GetById(id);
-            return View( currentSubject);
+            var groupList = _teacherService.List();
+            var selectListItem = groupList.Select(x => new SelectListItem
+            {
+                Text = x.Name,
+                Value = x.Id.ToString()
+            }).ToList();
+
+            selectListItem.Insert(0, new SelectListItem { Text = "", Value = "" });
+
+            var subject = _subjectService.GetById(id);
+            var model = new SubjectViewModel
+            {
+                Subject = subject,
+                TeacherList = selectListItem
+            };
+
+            return View(_editSubject, model);
         }
 
         // POST: SubjectController/Edit/5
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(int id, IFormCollection collection)
+        public ActionResult Edit(int id, Subject collection)
         {
-            var subject = _subjectService.GetById(id);
-
             try
             {
-                _subjectService.Update(id, subject);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _subjectService.Update(id, collection);
                 return RedirectToAction(nameof(Index));
             }
             catch

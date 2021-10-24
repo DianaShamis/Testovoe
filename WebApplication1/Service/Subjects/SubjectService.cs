@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -23,19 +24,19 @@ namespace WebApplication1.Service.Subjects
         }
         public void Create(Subject subject)
         {
-            //var newSubject = new Subject();
+            var newSubject = new Subject();
 
-            //if (subject != null)
-            //{
-                //newSubject.Name = subject.Name;
-                
-                _context.Add(subject);
+            if (subject != null)
+            {
+                newSubject.Name = subject.Name;
+                newSubject.TeacherId = subject.TeacherId;
+                _context.Add(newSubject);
                 _context.SaveChanges();
-            //}
+            }
         }
 
 
-        public void Update(int id, Models.SubjectTable.Subject subject)
+        public void Update(int id, Subject subject)
         {
             if (id != 0 && subject != null)
             {
@@ -48,6 +49,7 @@ namespace WebApplication1.Service.Subjects
                 else
                 {
                     currentSubject.Name = subject.Name;
+                    currentSubject.TeacherId = subject.TeacherId;
 
                     _context.Update(currentSubject);
                     _context.SaveChanges();
@@ -65,12 +67,12 @@ namespace WebApplication1.Service.Subjects
 
             }
         }
-        public Models.SubjectTable.Subject GetById(int id)
+        public Subject GetById(int id)
         {
-            var subject = new Models.SubjectTable.Subject();
+            var subject = new Subject();
             if (id > 0)
             {
-                subject = _context.Subjects.Where(_ => _.Id == id).FirstOrDefault();
+                subject = _context.Subjects.Where(_ => _.Id == id).Include(_ => _.Teacher).FirstOrDefault();
             }
             else
             {

@@ -7,6 +7,15 @@
     <h1>Куратор : @Model.Name</h1>
     <div>Специальность : @Model.Speciality</div>
 
+    <div>Читаемые предметы :</div>
+    @if (Model.Subject != null && Model.Subject.Count > 0)
+    {
+        foreach (var subject in Model.Subject)
+        {
+            <div>@subject.Name</div>
+        }
+    }
+
     <div class="createTeacher" style="position:relative; left:50%;">
         @Html.ActionLink("На главную", "Index", controllerName, new { area = "" }, new { @class = "navbar-brend" })
     </div>

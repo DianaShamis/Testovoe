@@ -11,11 +11,13 @@
 <div>
     @using (Html.BeginForm("Create", controllerName, FormMethod.Post, new { @class = "form-vertical form-bordered form-striped form-validate" }))
     {
-        <h1>Добавить курс</h1>
+        <h1>Создание курса</h1>
+
         <label>Введите название курса :</label>
+        <span asp-validation-for="Name" style="color:red;"></span>
         <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
 
-        <input type="submit" value="Добавить в курсы"/>
+        <input type="submit" value="Добавить в курсы" />
     }
 
     <div>

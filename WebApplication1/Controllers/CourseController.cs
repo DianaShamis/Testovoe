@@ -55,7 +55,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _courseService.Create(course);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _courseService.Create(course);
                 return RedirectToAction(nameof(Index));
             }
             catch
@@ -78,7 +81,10 @@ namespace WebApplication1.Controllers
         {
             try
             {
-                _courseService.Update(id, course);
+                if (!ModelState.IsValid)
+                    return NoContent();
+                else
+                    _courseService.Update(id, course);
                 return RedirectToAction(nameof(Index));
             }
             catch
