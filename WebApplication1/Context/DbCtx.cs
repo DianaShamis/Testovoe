@@ -13,7 +13,7 @@ namespace WebApplication1.Context
         public DbCtx(DbContextOptions<DbCtx> options)
             : base(options)
         {
-
+            Database.EnsureCreated();
         }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
