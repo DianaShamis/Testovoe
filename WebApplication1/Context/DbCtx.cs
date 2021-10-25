@@ -13,7 +13,7 @@ namespace WebApplication1.Context
         public DbCtx(DbContextOptions<DbCtx> options)
             : base(options)
         {
-            Database.EnsureCreated();
+            //Database.EnsureCreated();
         }
         public DbSet<Course> Courses { get; set; }
         public DbSet<Group> Groups { get; set; }
@@ -24,9 +24,9 @@ namespace WebApplication1.Context
 
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestBD;Trusted_Connection=True;");
-        }
+        //protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        //{
+        //    optionsBuilder.UseSqlServer("Server=(localdb)\\mssqllocaldb;Database=TestBD;Trusted_Connection=True;");
+        //}
     }
 }

@@ -13,11 +13,11 @@
         <h1>Создание группы</h1>
 
         <label>Введите название группы :</label>
-
         <span asp-validation-for="Name" style="color:red;"></span>
         <div>@Html.TextBoxFor(x => x.Name, new { @class = "form-control" })</div>
 
         <label>Введите год :</label>
+        <span asp-validation-for="Year" style="color:red;"></span>
         <div>@Html.TextBoxFor(x => x.Year, new { @type = "date" })</div>
 
         <label>Введите специальность :</label>

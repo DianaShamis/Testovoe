@@ -12,6 +12,7 @@ namespace WebApplication1.Models.GroupTable
         public int Id { get; set; }
         [Required (ErrorMessage = "Не указано имя")]
         public string Name { get; set; }
+        [Required(ErrorMessage = "Введите дату ")]
         public DateTime Year { get; set; }
         [Required(ErrorMessage = "Не указана специальность")]
         public string Speciality { get; set; }

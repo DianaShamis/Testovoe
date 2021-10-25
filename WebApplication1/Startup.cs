@@ -4,6 +4,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.IO;
 using WebApplication1.Context;
 using WebApplication1.Service.Courses;
 using WebApplication1.Service.Groups;
@@ -15,6 +16,7 @@ namespace WebApplication1
 {
     public class Startup
     {
+        string path = Directory.GetCurrentDirectory() + "\\DataBase";
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -25,7 +27,7 @@ namespace WebApplication1
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<DbCtx>(option => option.UseSqlServer(Configuration.GetConnectionString("ConnectionString")));
+            services.AddDbContext<DbCtx>(option => option.UseSqlServer(Configuration.GetConnectionString("ConnectionString").Replace("[DataDirectory]", path)));
             services.AddTransient<IGroupService, GroupService>();
             services.AddTransient<ITeacherService, TeacherService>();
             services.AddTransient<IStudentService, StudentService>();
